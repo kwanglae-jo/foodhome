@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a1410"/>
+      <stop offset="55%" stop-color="#7a2418"/>
+      <stop offset="100%" stop-color="#c0392b"/>
+    </linearGradient>
+    <radialGradient id="broth" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff6a4d"/>
+      <stop offset="55%" stop-color="#e0402a"/>
+      <stop offset="100%" stop-color="#a8241a"/>
+    </radialGradient>
+    <linearGradient id="potMetal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e7e7e7"/>
+      <stop offset="100%" stop-color="#b9b9b9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+
+  <!-- steam -->
+  <g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.28">
+    <path d="M420,300 C400,250 460,220 440,170 C420,120 480,90 470,50">
+      <animate attributeName="d" dur="6s" repeatCount="indefinite"
+        values="M420,300 C400,250 460,220 440,170 C420,120 480,90 470,50;
+                M420,300 C400,260 470,230 440,180 C410,130 480,100 470,60;
+                M420,300 C400,250 460,220 440,170 C420,120 480,90 470,50"/>
+    </path>
+    <path d="M600,290 C580,240 640,210 620,160 C600,110 660,80 650,40">
+      <animate attributeName="d" dur="7s" repeatCount="indefinite"
+        values="M600,290 C580,240 640,210 620,160 C600,110 660,80 650,40;
+                M600,290 C580,250 650,220 620,170 C590,120 660,90 650,50;
+                M600,290 C580,240 640,210 620,160 C600,110 660,80 650,40"/>
+    </path>
+    <path d="M780,300 C760,250 820,220 800,170 C780,120 840,90 830,50">
+      <animate attributeName="d" dur="6.5s" repeatCount="indefinite"
+        values="M780,300 C760,250 820,220 800,170 C780,120 840,90 830,50;
+                M780,300 C760,260 830,230 800,180 C770,130 840,100 830,60;
+                M780,300 C760,250 820,220 800,170 C780,120 840,90 830,50"/>
+    </path>
+  </g>
+
+  <!-- pot rim / handles -->
+  <ellipse cx="600" cy="470" rx="380" ry="70" fill="url(#potMetal)"/>
+  <rect x="180" y="440" width="70" height="34" rx="14" fill="#b9b9b9"/>
+  <rect x="950" y="440" width="70" height="34" rx="14" fill="#b9b9b9"/>
+
+  <!-- broth -->
+  <ellipse cx="600" cy="460" rx="345" ry="56" fill="url(#broth)"/>
+
+  <!-- floating ingredients -->
+  <ellipse cx="470" cy="450" rx="46" ry="26" fill="#f6d9c4"/>
+  <ellipse cx="470" cy="450" rx="46" ry="26" fill="none" stroke="#d99a6c" stroke-width="3"/>
+
+  <ellipse cx="700" cy="440" rx="40" ry="24" fill="#e8f5df"/>
+  <path d="M680,432 q20,-14 40,0" fill="none" stroke="#7fae52" stroke-width="4"/>
+
+  <ellipse cx="560" cy="475" rx="34" ry="20" fill="#f7b6a6"/>
+  <ellipse cx="620" cy="480" rx="30" ry="18" fill="#f2a893"/>
+
+  <ellipse cx="820" cy="455" rx="36" ry="22" fill="#fbe08a"/>
+  <circle cx="820" cy="455" r="6" fill="#e0402a"/>
+
+  <ellipse cx="380" cy="470" rx="30" ry="18" fill="#e8f5df"/>
+  <path d="M362,464 q18,-12 36,0" fill="none" stroke="#7fae52" stroke-width="4"/>
+
+  <!-- pot body -->
+  <path d="M240,470 L260,620 Q600,680 940,620 L960,470 Z" fill="url(#potMetal)"/>
+  <ellipse cx="600" cy="470" rx="360" ry="60" fill="none" stroke="#8f8f8f" stroke-width="3" opacity="0.4"/>
+
+  <!-- flame base -->
+  <ellipse cx="600" cy="640" rx="120" ry="14" fill="#000000" opacity="0.15"/>
+
+  <!-- side garnish: herbs -->
+  <g opacity="0.9">
+    <ellipse cx="150" cy="620" rx="70" ry="18" fill="#4f7a35"/>
+    <ellipse cx="130" cy="605" rx="34" ry="14" fill="#5c8a3f"/>
+    <ellipse cx="1060" cy="610" rx="80" ry="20" fill="#4f7a35"/>
+    <ellipse cx="1080" cy="595" rx="36" ry="14" fill="#5c8a3f"/>
+  </g>
+</svg>
