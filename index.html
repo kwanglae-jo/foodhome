@@ -39,10 +39,16 @@
 
   /* Hero */
   .hero{
-    background:linear-gradient(180deg,rgba(34,10,6,.45) 0%,rgba(34,10,6,.35) 45%,rgba(34,10,6,.65) 100%),
-      url('assets/hero-food.svg');
+    background:linear-gradient(180deg,rgba(33,10,5,.5) 0%,rgba(33,10,5,.3) 45%,rgba(33,10,5,.65) 100%),
+      url('assets/hero-web.png');
     background-size:cover;background-position:center;
     color:#fff;text-align:center;padding:140px 20px;
+  }
+  @media(max-width:600px){
+    .hero{
+      background:linear-gradient(180deg,rgba(33,10,5,.5) 0%,rgba(33,10,5,.3) 45%,rgba(33,10,5,.65) 100%),
+        url('assets/hero-mobile.png');
+    }
   }
   .hero .badge{
     display:inline-block;background:rgba(255,255,255,.92);color:var(--ink);padding:6px 16px;
