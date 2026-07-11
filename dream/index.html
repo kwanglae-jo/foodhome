@@ -282,7 +282,16 @@ document.getElementById("submitBtn").addEventListener("click", () => {
   }
   const result = interpretDream(input);
   render(result);
+  logDream(input, result);
 });
+
+function logDream(dreamText, result) {
+  fetch("/api/log-dream", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ dreamText, luck: result.luck, title: result.title }),
+  }).catch(() => {});
+}
 
 document.getElementById("dreamInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
