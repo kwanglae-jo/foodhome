@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>오늘의 꿈해몽 | 길몽 흉몽 풀이</title>
+<meta name="description" content="오늘 꾼 꿈을 입력하면 길몽인지 흉몽인지, 어떤 의미인지 바로 알려주는 꿈해몽 서비스" />
+<style>
+  :root {
+    --bg1: #1b1035;
+    --bg2: #3b1d63;
+    --accent: #ffd76a;
+    --accent2: #a78bfa;
+    --card: rgba(255,255,255,0.06);
+    --text: #f4f1ff;
+    --muted: #c9c0e8;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: radial-gradient(ellipse at top, var(--bg2), var(--bg1) 60%);
+    color: var(--text);
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px 80px;
+  }
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 70% 60%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent),
+      radial-gradient(1px 1px at 85% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 55% 45%, #fff, transparent),
+      radial-gradient(1px 1px at 10% 65%, #fff, transparent);
+    background-size: 100% 100%;
+    opacity: 0.5;
+  }
+  header { text-align: center; margin-bottom: 28px; z-index: 1; }
+  header .badge {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  header p { color: var(--muted); margin: 0; font-size: 14px; }
+
+  main {
+    width: 100%;
+    max-width: 520px;
+    z-index: 1;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  }
+  label {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.5;
+    outline: none;
+  }
+  textarea:focus { border-color: var(--accent2); }
+  textarea::placeholder { color: #8f86b8; }
+
+  button.submit {
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent2), #7c3aed);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  button.submit:hover { transform: translateY(-1px); opacity: 0.92; }
+  button.submit:active { transform: translateY(0); }
+
+  .hint {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #9187b8;
+    text-align: center;
+  }
+
+  #result {
+    margin-top: 20px;
+    display: none;
+  }
+  .result-card {
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.12);
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .luck-good { background: linear-gradient(145deg, rgba(255,215,106,0.18), rgba(255,255,255,0.05)); }
+  .luck-bad { background: linear-gradient(145deg, rgba(255,90,90,0.16), rgba(255,255,255,0.05)); }
+  .luck-neutral { background: linear-gradient(145deg, rgba(167,139,250,0.18), rgba(255,255,255,0.05)); }
+
+  .luck-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .luck-good .luck-tag { background: var(--accent); color: #402d00; }
+  .luck-bad .luck-tag { background: #ff6b6b; color: #400000; }
+  .luck-neutral .luck-tag { background: var(--accent2); color: #23124a; }
+
+  .result-card h2 { margin: 0 0 10px; font-size: 20px; }
+  .result-card p { margin: 0 0 6px; color: var(--text); font-size: 15px; line-height: 1.6; }
+  .keywords { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .keywords span {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    color: var(--muted);
+  }
+  .disclaimer {
+    margin-top: 14px;
+    font-size: 11px;
+    color: #9187b8;
+    border-top: 1px dashed rgba(255,255,255,0.15);
+    padding-top: 10px;
+  }
+
+  footer {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #766b9c;
+    z-index: 1;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <header>
+    <div class="badge">DREAM INTERPRETER</div>
+    <h1>🌙 오늘의 꿈해몽</h1>
+    <p>오늘 꾼 꿈을 간단히 적어보세요. 길몽인지 흉몽인지 바로 알려드려요.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <label for="dreamInput">어떤 꿈을 꾸셨나요?</label>
+      <textarea id="dreamInput" placeholder="예) 뱀이 나를 쫓아와서 도망가다가 넓은 바다를 봤어요"></textarea>
+      <button class="submit" id="submitBtn">꿈해몽 보기</button>
+      <div class="hint">키워드를 기반으로 한 참고용 해몽이에요. 재미로만 봐주세요 🙂</div>
+    </div>
+
+    <div id="result"></div>
+  </main>
+
+  <footer>© 2026 오늘의 꿈해몽</footer>
+
+<script>
+// 키워드 -> 해몽 사전 (luck: good | bad | neutral)
+const DREAM_DICTIONARY = [
+  { keywords: ["뱀"], luck: "good", title: "뱀 꿈", text: "뱀 꿈은 대표적인 길몽으로, 재물운이나 좋은 인연이 들어올 조짐이에요. 특히 뱀에게 물리거나 뱀을 잡는 꿈은 재물이 크게 들어올 수 있다는 뜻이에요." },
+  { keywords: ["돼지"], luck: "good", title: "돼지 꿈", text: "돼지 꿈은 재물운의 상징이에요. 복권이나 큰 지출이 있는 결정을 앞두고 있다면 좋은 신호일 수 있어요." },
+  { keywords: ["똥", "대변"], luck: "good", title: "똥 꿈", text: "찝찝하게 느껴지지만 사실 똥 꿈은 재물이 들어오는 대표적인 길몽이에요." },
+  { keywords: ["물", "바다", "강", "홍수"], luck: "good", title: "물/바다 꿈", text: "맑고 넓은 물이나 바다를 보는 꿈은 마음이 편안해지고 운이 트이는 길몽이에요. 다만 흙탕물이나 물에 빠지는 꿈은 근심이나 스트레스를 의미할 수 있어요." },
+  { keywords: ["불", "화재"], luck: "good", title: "불 꿈", text: "불이 활활 타오르는 꿈은 열정과 성공, 재물운 상승을 뜻하는 길몽이에요. 다만 내 물건이 불타 없어지는 꿈이라면 변화나 손실을 조심하라는 의미일 수 있어요." },
+  { keywords: ["이빨", "이가 빠지", "치아"], luck: "bad", title: "이 빠지는 꿈", text: "이가 빠지는 꿈은 대표적인 흉몽으로, 가까운 사람과의 이별이나 건강 문제, 자신감 저하를 암시할 수 있어요. 너무 걱정하기보다 컨디션 관리에 신경 써보세요." },
+  { keywords: ["떨어지", "추락"], luck: "bad", title: "떨어지는 꿈", text: "높은 곳에서 떨어지는 꿈은 불안감이나 스트레스, 상황에 대한 통제력을 잃을까 하는 걱정을 반영해요. 요즘 부담을 느끼는 일이 있는지 점검해보면 좋아요." },
+  { keywords: ["쫓기", "도망"], luck: "bad", title: "쫓기는 꿈", text: "누군가에게 쫓기는 꿈은 현실에서 회피하고 싶은 문제나 압박감을 나타내요. 무엇이 나를 쫓고 있었는지 떠올려보면 답을 찾는 데 도움이 될 수 있어요." },
+  { keywords: ["시험"], luck: "bad", title: "시험 보는 꿈", text: "시험 관련 꿈은 현재 스스로에 대한 평가나 부담감, 준비 부족에 대한 불안을 반영하는 경우가 많아요." },
+  { keywords: ["죽", "사망", "장례"], luck: "good", title: "죽음/장례 꿈", text: "의외로 죽음이나 장례식 꿈은 나쁜 것을 상징하지 않고, 오히려 묵은 문제가 해결되고 새로운 시작을 맞이하는 길몽으로 해석돼요." },
+  { keywords: ["결혼"], luck: "neutral", title: "결혼하는 꿈", text: "결혼 꿈은 새로운 시작이나 관계의 변화, 계약과 관련된 일을 암시해요. 좋고 나쁨보다는 인생의 중요한 전환점을 뜻하는 경우가 많아요." },
+  { keywords: ["임신", "아기"], luck: "good", title: "임신/아기 꿈", text: "임신이나 아기가 나오는 꿈은 새로운 계획이나 프로젝트의 시작, 좋은 소식이 들려올 길몽으로 여겨져요." },
+  { keywords: ["돈", "지갑", "금"], luck: "good", title: "돈/금 꿈", text: "돈이나 금을 줍거나 얻는 꿈은 재물운 상승을 뜻하는 대표적인 길몽이에요." },
+  { keywords: ["비행기", "하늘을 날"], luck: "good", title: "하늘을 나는 꿈", text: "하늘을 자유롭게 나는 꿈은 목표에 가까워지고 있다는 뜻으로, 자신감과 성취운이 따르는 길몽이에요." },
+  { keywords: ["거미"], luck: "good", title: "거미 꿈", text: "거미가 나오는 꿈은 재물운이나 인복이 따르는 길몽으로 해석돼요. 특히 거미줄을 치는 모습은 계획이 순조롭게 진행된다는 뜻이에요." },
+  { keywords: ["개", "강아지"], luck: "neutral", title: "개/강아지 꿈", text: "개는 충직한 인연이나 도움을 주는 사람을 상징해요. 개가 짖거나 무는 꿈이라면 주변 사람과의 갈등을 조심하라는 신호일 수 있어요." },
+  { keywords: ["고양이"], luck: "neutral", title: "고양이 꿈", text: "고양이 꿈은 예민함이나 경계심을 상징해요. 상황에 따라 배신이나 의심을 조심하라는 뜻일 수도, 독립심과 직관력을 뜻할 수도 있어요." },
+  { keywords: ["시체"], luck: "good", title: "시체를 보는 꿈", text: "시체를 보는 꿈은 불길하게 느껴지지만 실제로는 오래된 문제가 해결되고 재물운이 상승하는 길몽으로 여겨져요." },
+  { keywords: ["귀신", "유령"], luck: "bad", title: "귀신 꿈", text: "귀신이나 유령이 나오는 꿈은 마음속 불안이나 해결하지 못한 걱정거리를 상징해요. 최근 스트레스를 받는 일이 있는지 돌아보면 좋아요." },
+  { keywords: ["이사", "집"], luck: "neutral", title: "이사/집 꿈", text: "이사나 새로운 집에 대한 꿈은 환경 변화나 새로운 시작에 대한 마음가짐을 반영해요." },
+  { keywords: ["시험 합격", "합격"], luck: "good", title: "합격 꿈", text: "합격하는 꿈은 노력한 일이 좋은 결실을 맺는다는 길몽이에요." },
+];
+
+const FALLBACK = {
+  luck: "neutral",
+  title: "알 수 없는 꿈",
+  text: "아직 사전에 없는 상징의 꿈이네요. 꿈에서 느꼈던 감정(편안함/불안함)이 현재 마음 상태를 더 잘 보여주는 경우가 많아요. 조금 더 구체적인 키워드로 다시 적어보시면 더 정확히 풀이해드릴 수 있어요.",
+};
+
+const LUCK_LABEL = {
+  good: "✨ 길몽",
+  bad: "⚠️ 흉몽",
+  neutral: "🌗 평몽",
+};
+
+function interpretDream(input) {
+  const matched = [];
+  for (const entry of DREAM_DICTIONARY) {
+    if (entry.keywords.some((k) => input.includes(k))) {
+      matched.push(entry);
+    }
+  }
+  if (matched.length === 0) {
+    return { ...FALLBACK, matchedKeywords: [] };
+  }
+
+  const luckCount = { good: 0, bad: 0, neutral: 0 };
+  matched.forEach((m) => luckCount[m.luck]++);
+  let overallLuck = "neutral";
+  if (luckCount.good > luckCount.bad) overallLuck = "good";
+  else if (luckCount.bad > luckCount.good) overallLuck = "bad";
+
+  return {
+    luck: overallLuck,
+    title: matched.map((m) => m.title).join(" · "),
+    text: matched.map((m) => m.text).join(" "),
+    matchedKeywords: matched.flatMap((m) => m.keywords).filter((k, i, arr) => arr.indexOf(k) === i),
+  };
+}
+
+function render(result) {
+  const el = document.getElementById("result");
+  const keywordsHtml = result.matchedKeywords && result.matchedKeywords.length
+    ? `<div class="keywords">${result.matchedKeywords.map((k) => `<span>#${k}</span>`).join("")}</div>`
+    : "";
+  el.innerHTML = `
+    <div class="result-card luck-${result.luck}">
+      <div class="luck-tag">${LUCK_LABEL[result.luck]}</div>
+      <h2>${result.title}</h2>
+      <p>${result.text}</p>
+      ${keywordsHtml}
+      <div class="disclaimer">본 해몽은 전통적인 꿈 상징 풀이를 참고한 재미용 콘텐츠로, 실제 미래를 예측하지 않아요.</div>
+    </div>
+  `;
+  el.style.display = "block";
+  el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+document.getElementById("submitBtn").addEventListener("click", () => {
+  const input = document.getElementById("dreamInput").value.trim();
+  if (!input) {
+    alert("오늘 꾼 꿈을 입력해주세요!");
+    return;
+  }
+  const result = interpretDream(input);
+  render(result);
+});
+
+document.getElementById("dreamInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+    document.getElementById("submitBtn").click();
+  }
+});
+</script>
+</body>
+</html>
