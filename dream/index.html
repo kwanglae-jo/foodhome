@@ -7,176 +7,198 @@
 <meta name="description" content="오늘 꾼 꿈을 입력하면 길몽인지 흉몽인지, 어떤 의미인지 바로 알려주는 꿈해몽 서비스" />
 <style>
   :root {
-    --bg1: #1b1035;
-    --bg2: #3b1d63;
-    --accent: #ffd76a;
-    --accent2: #a78bfa;
-    --card: rgba(255,255,255,0.06);
-    --text: #f4f1ff;
-    --muted: #c9c0e8;
+    --primary: #3182f6;
+    --primary-hover: #2272eb;
+    --primary-weak-bg: rgba(100, 168, 255, 0.15);
+    --canvas: #ffffff;
+    --foreground: #191f28;
+    --grey700: #4e5968;
+    --grey600: #6b7684;
+    --grey500: #8b95a1;
+    --grey400: #b0b8c1;
+    --surface: #f2f4f6;
+    --border: #e5e8eb;
+    --error: #f04452;
+    --error-weak-bg: rgba(251, 136, 144, 0.15);
+    --success: #03b26c;
+    --success-weak-bg: rgba(34, 197, 94, 0.15);
+    --warning: #fe9800;
+    --warning-weak-bg: rgba(254, 152, 0, 0.15);
   }
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
     min-height: 100%;
-    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-    background: radial-gradient(ellipse at top, var(--bg2), var(--bg1) 60%);
-    color: var(--text);
+    font-family: "Toss Product Sans", "SF Pro KR", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", Roboto, "Noto Sans KR", sans-serif;
+    background: var(--canvas);
+    color: var(--foreground);
   }
   body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 16px 80px;
+    padding: 48px 20px 80px;
   }
-  .stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, #fff, transparent),
-      radial-gradient(1px 1px at 70% 60%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 40% 80%, #fff, transparent),
-      radial-gradient(1px 1px at 85% 20%, #fff, transparent),
-      radial-gradient(1.5px 1.5px at 55% 45%, #fff, transparent),
-      radial-gradient(1px 1px at 10% 65%, #fff, transparent);
-    background-size: 100% 100%;
-    opacity: 0.5;
-  }
-  header { text-align: center; margin-bottom: 28px; z-index: 1; }
+  header { width: 100%; max-width: 480px; margin-bottom: 24px; }
   header .badge {
     display: inline-block;
     font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-weak-bg);
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
   }
-  h1 { font-size: 28px; margin: 0 0 8px; }
-  header p { color: var(--muted); margin: 0; font-size: 14px; }
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.38;
+    margin: 0 0 8px;
+    color: var(--foreground);
+  }
+  header p {
+    color: var(--grey600);
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
 
   main {
     width: 100%;
-    max-width: 520px;
-    z-index: 1;
+    max-width: 480px;
   }
   .card {
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 20px;
+    background: var(--canvas);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 24px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
   }
   label {
     display: block;
     font-size: 14px;
-    color: var(--muted);
+    font-weight: 600;
+    color: var(--foreground);
     margin-bottom: 10px;
   }
   textarea {
     width: 100%;
-    min-height: 110px;
+    min-height: 120px;
     resize: vertical;
-    background: rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 12px;
-    padding: 14px;
-    color: var(--text);
-    font-size: 15px;
+    background: rgba(0, 23, 51, 0.02);
+    border: 1px solid rgba(2, 32, 71, 0.05);
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: var(--foreground);
+    font-family: inherit;
+    font-size: 17px;
     line-height: 1.5;
     outline: none;
   }
-  textarea:focus { border-color: var(--accent2); }
-  textarea::placeholder { color: #8f86b8; }
+  textarea:focus { border-color: var(--primary); }
+  textarea::placeholder { color: var(--grey400); }
 
   button.submit {
     width: 100%;
     margin-top: 16px;
-    padding: 14px;
+    height: 56px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--accent2), #7c3aed);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
+    border-radius: 16px;
+    background: var(--primary);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition: background 0.15s ease;
   }
-  button.submit:hover { transform: translateY(-1px); opacity: 0.92; }
-  button.submit:active { transform: translateY(0); }
+  button.submit:hover { background: var(--primary-hover); }
+  button.submit:active { opacity: 0.9; }
 
   .hint {
     margin-top: 12px;
-    font-size: 12px;
-    color: #9187b8;
+    font-size: 13px;
+    color: var(--grey500);
     text-align: center;
   }
 
   #result {
-    margin-top: 20px;
+    margin-top: 16px;
     display: none;
   }
   .result-card {
-    border-radius: 20px;
+    background: var(--canvas);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 24px;
-    border: 1px solid rgba(255,255,255,0.12);
-    animation: fadeIn 0.4s ease;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+    animation: fadeIn 0.25s cubic-bezier(0.0, 0.0, 0.2, 1);
   }
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .luck-good { background: linear-gradient(145deg, rgba(255,215,106,0.18), rgba(255,255,255,0.05)); }
-  .luck-bad { background: linear-gradient(145deg, rgba(255,90,90,0.16), rgba(255,255,255,0.05)); }
-  .luck-neutral { background: linear-gradient(145deg, rgba(167,139,250,0.18), rgba(255,255,255,0.05)); }
 
   .luck-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 999px;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 12px;
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 14px;
   }
-  .luck-good .luck-tag { background: var(--accent); color: #402d00; }
-  .luck-bad .luck-tag { background: #ff6b6b; color: #400000; }
-  .luck-neutral .luck-tag { background: var(--accent2); color: #23124a; }
+  .luck-good .luck-tag { background: var(--success-weak-bg); color: #16a34a; }
+  .luck-bad .luck-tag { background: var(--error-weak-bg); color: #dc2626; }
+  .luck-neutral .luck-tag { background: var(--warning-weak-bg); color: #b8720a; }
 
-  .result-card h2 { margin: 0 0 10px; font-size: 20px; }
-  .result-card p { margin: 0 0 6px; color: var(--text); font-size: 15px; line-height: 1.6; }
+  .result-card h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--foreground);
+  }
+  .result-card p {
+    margin: 0 0 6px;
+    color: var(--grey700);
+    font-size: 15px;
+    line-height: 1.57;
+    font-weight: 400;
+  }
   .keywords { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
   .keywords span {
     font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.1);
-    color: var(--muted);
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 11px;
+    background: var(--surface);
+    color: var(--grey600);
   }
   .disclaimer {
     margin-top: 14px;
-    font-size: 11px;
-    color: #9187b8;
-    border-top: 1px dashed rgba(255,255,255,0.15);
-    padding-top: 10px;
+    font-size: 12px;
+    color: var(--grey500);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    line-height: 1.5;
   }
 
   footer {
     margin-top: 40px;
     font-size: 12px;
-    color: #766b9c;
-    z-index: 1;
+    color: var(--grey400);
     text-align: center;
   }
 </style>
 </head>
 <body>
-  <div class="stars"></div>
-
   <header>
     <div class="badge">DREAM INTERPRETER</div>
-    <h1>🌙 오늘의 꿈해몽</h1>
+    <h1>오늘의 꿈해몽</h1>
     <p>오늘 꾼 꿈을 간단히 적어보세요. 길몽인지 흉몽인지 바로 알려드려요.</p>
   </header>
 
@@ -185,7 +207,7 @@
       <label for="dreamInput">어떤 꿈을 꾸셨나요?</label>
       <textarea id="dreamInput" placeholder="예) 뱀이 나를 쫓아와서 도망가다가 넓은 바다를 봤어요"></textarea>
       <button class="submit" id="submitBtn">꿈해몽 보기</button>
-      <div class="hint">키워드를 기반으로 한 참고용 해몽이에요. 재미로만 봐주세요 🙂</div>
+      <div class="hint">키워드를 기반으로 한 참고용 해몽이에요. 재미로만 봐주세요</div>
     </div>
 
     <div id="result"></div>
@@ -293,9 +315,9 @@ const FALLBACK = {
 };
 
 const LUCK_LABEL = {
-  good: "✨ 길몽",
-  bad: "⚠️ 흉몽",
-  neutral: "🌗 평몽",
+  good: "길몽",
+  bad: "흉몽",
+  neutral: "평몽",
 };
 
 function interpretDream(input) {
